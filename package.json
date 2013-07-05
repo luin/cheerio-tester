@@ -1,0 +1,9 @@
+{
+  "name": "cheerio-tester",
+  "version": "0.0.1",
+  "dependencies": {
+    "cheerio": "~0.12.0",
+    "socket.io": "~0.9.16",
+    "request": "~2.21.0"
+  }
+}

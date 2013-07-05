@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Cheerio online tester</title>
+<style>
+html, body {color: #333; background-color: #f9f9f9; font-size: 16px; height: 100%;}
+input {display: block; margin: 20px auto 0; width: 800px; padding: 4px 0; font-size: 16px;}
+textarea {display: block; margin: 20px auto 0; width: 800px; height: 494px; font-size: 16px;}
+#console {margin: 20px auto 0; width: 800px; height: 200px;}
+</style>
+</head>
+<body>
+<input type="text" placeholder="http://" />
+<textarea></textarea>
+<div id="console"></div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io.connect('http://localhost:9909');
+
+  var _console = document.getElementById('console');
+  var textarea = document.getElementsByTagName('textarea')[0];
+  var input = document.getElementsByTagName('input')[0];
+  textarea.onkeyup = function(e) {
+    socket.emit('url', input.value, function() {
+      socket.emit('code', textarea.value, function(result) {
+        if (result) {
+          _console.innerHTML = result;
+        }
+      });
+    });
+  }
+</script>
+</body>
+</html>
+
